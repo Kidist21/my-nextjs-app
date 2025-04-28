@@ -3,18 +3,20 @@ import blogPosts from '../../data/blogPosts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+// 1. generateStaticParams
 export async function generateStaticParams() {
   return blogPosts.map(post => ({
     slug: post.slug,
   }));
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+// 2. Page Component: MUST BE `async function`
+export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
-    notFound(); // throw 404 if no post
+    notFound();
   }
 
   return (
