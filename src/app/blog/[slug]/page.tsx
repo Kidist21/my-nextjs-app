@@ -1,19 +1,17 @@
-import Layout from '@/app/components/Layout';
-import React from 'react';
-import blogPosts from '../../data/blogPosts'; // (Fixed path!)
-import Link from 'next/link';
+// src/app/blog/[slug]/page.tsx
 
-interface PageProps {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+import Layout from '@/app/components/Layout';
+import blogPosts from '@/app/data/blogPosts'; // make sure the path is correct
+import Link from 'next/link';
 
 // Generate static paths
 export async function generateStaticParams() {
-  return blogPosts.map(post => ({ slug: post.slug }));
+  return blogPosts.map(post => ({
+    slug: post.slug,
+  }));
 }
 
-const BlogPost = ({ params }: PageProps) => {
+export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
@@ -32,6 +30,4 @@ const BlogPost = ({ params }: PageProps) => {
       )}
     </Layout>
   );
-};
-
-export default BlogPost;
+}
