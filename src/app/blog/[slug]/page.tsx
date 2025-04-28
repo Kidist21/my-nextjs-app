@@ -6,8 +6,6 @@ import Link from 'next/link';
 interface BlogPageProps {
     params: {
       slug: string;
-      title: string;
-      content: string;
     };
   }
 
