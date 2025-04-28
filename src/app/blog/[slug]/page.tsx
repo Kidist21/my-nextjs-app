@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
-  return blogPosts.map(blogPost => ({
-    slug: blogPost.slug,
+  return blogPosts.map(post => ({
+    slug: post.slug,
   }));
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
