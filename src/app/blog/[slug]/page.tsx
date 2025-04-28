@@ -1,18 +1,15 @@
 import Layout from '@/app/components/Layout';
-import React from 'react';
 import blogPosts from '../../data/blogPosts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-// Generate static paths
 export async function generateStaticParams() {
   return blogPosts.map(blogPost => ({
     slug: blogPost.slug,
   }));
 }
 
-// Page component
-export default function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
