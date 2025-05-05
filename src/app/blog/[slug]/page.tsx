@@ -12,14 +12,14 @@ interface BlogPageProps {
 
 // Generate static paths with only slugs
 export async function generateStaticParams() {
-  return await blogPosts.map(blogPost => ({
+  return blogPosts.map(blogPost => ({
     slug: blogPost.slug,
   }));
 }
 
 // Component that fetches the blog post based on the slug
-const  BlogPost = async ({ params }: BlogPageProps) => {
-  const { slug } = await params;
+const BlogPost = async ({ params }: BlogPageProps) => {
+  const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
   return (
