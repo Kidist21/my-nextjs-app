@@ -1,5 +1,5 @@
 import Layout from '@/app/components/Layout';
-import React from 'react';
+import React, { use } from 'react';
 import blogPosts from '../../data/blogPosts';
 import Link from 'next/link';
 
@@ -9,8 +9,10 @@ export async function generateStaticParams() {
   }));
 }
 
-const BlogPost = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = await params;
+
+export default function BlogPost({params}: {params: Promise<{ slug: string }>}) {
+  const { slug } = use(params);
+
   const post = blogPosts.find(p => p.slug === slug);
 
   return (
@@ -29,5 +31,3 @@ const BlogPost = async ({ params }: { params: { slug: string } }) => {
     </Layout>
   );
 };
-
-export default BlogPost;
