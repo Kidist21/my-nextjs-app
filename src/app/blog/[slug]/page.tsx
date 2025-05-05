@@ -3,23 +3,14 @@ import React from 'react';
 import blogPosts from '../../data/blogPosts';
 import Link from 'next/link';
 
-// Define the type for the params
-interface BlogPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-// Generate static paths with only slugs
 export async function generateStaticParams() {
   return blogPosts.map(blogPost => ({
     slug: blogPost.slug,
   }));
 }
 
-// Component that fetches the blog post based on the slug
-const BlogPost = async ({ params }: BlogPageProps) => {
-  const { slug } = params;
+const BlogPost = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = await params;
   const post = blogPosts.find(p => p.slug === slug);
 
   return (
