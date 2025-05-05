@@ -3,8 +3,10 @@ import Layout from '../components/Layout'
 import { Project } from '../model/project'; 
 
 async function getProjects() {
-    const res = await fetch('http://localhost:3000/api/projects', {
-      cache: 'no-store', // 👈 Important: This makes it SERVER-SIDE (fresh on every request, like getServerSideProps)
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+  const res = await fetch(`${baseUrl}/api/projects`, {
+        cache: 'no-store', // 👈 Important: This makes it SERVER-SIDE (fresh on every request, like getServerSideProps)
     })
     const data = await res.json()
     return data
